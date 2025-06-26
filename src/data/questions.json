@@ -2,7 +2,7 @@
     {
         "id": "A",
         "label": "wie fühlt sich deine Kopfhaut an?",
-        "answers": [
+        "choices": [
             {
                 "id": "a",
                 "label": "Trocken & juckend",
