@@ -22,4 +22,8 @@ describe("GET /questionnaire/new", () => {
         const other = await request(app).get("/questionnaire/new");
         expect(res.body.id).not.toBe(other.body.id);
     });
+
+    it("should return a type-valid questionnaire", () => {
+        expect(res.body.questions).toBeDefined();
+    });
 });
