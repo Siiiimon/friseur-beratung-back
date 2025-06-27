@@ -1,7 +1,14 @@
 import { Choice, Responses } from "../types/questionnaire";
 import { getQuestionnaireData } from "./questionnaireData";
+import { Result } from "../types/result";
 
-export const evaluate = (responses: Responses): Record<string, number> => {
+export const evaluate = (
+    responses: Responses,
+): Result<Record<string, number>> => {
+    if (!responses || responses.length === 0) {
+        return { error: { status: 400, message: "empty answer sheet" } };
+    }
+
     const tallies: Record<string, number> = {};
     const questionnaire = getQuestionnaireData();
 
@@ -23,7 +30,7 @@ export const evaluate = (responses: Responses): Record<string, number> => {
         });
     });
 
-    return tallies;
+    return { ok: tallies };
 };
 
 const getTagsOfMatchingChoices = (

@@ -12,7 +12,10 @@ export const newQuestionnaire = (_: Request, res: Response) => {
 export const submitQuestionnaire = (req: Request, res: Response) => {
     const { id, responses } = req.body as { id: string; responses: Responses };
 
-    const tallies = evaluate(responses);
+    const { ok: tallies, error } = evaluate(responses);
+    if (error) {
+        return res.status(error.status).json({ error: error.message });
+    }
 
     res.json({ id, tallies });
 };
