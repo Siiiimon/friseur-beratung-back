@@ -1,7 +1,9 @@
 export type Result<T> = {
     ok?: T;
-    error?: {
-        status: number;
-        message: string;
-    };
+    error?: Error;
+};
+
+export type Error = {
+    status: number;
+    message: string;
 };
