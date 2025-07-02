@@ -1,9 +1,8 @@
-export type Result<T> = {
-    ok?: T;
-    error?: Error;
-};
+export type Result<T> =
+    | { ok: T; error?: never }
+    | { ok?: never; error: ResultError };
 
-export type Error = {
+export type ResultError = {
     status: number;
     message: string;
 };
