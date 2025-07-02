@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import apiRoutes from "./routes/routes";
 import { Client } from "pg";
@@ -7,6 +8,16 @@ dotenv.config();
 
 const app = express();
 const client = new Client();
+
+const frontend = process.env.FRONTEND_URL;
+if (!frontend) {
+    throw new Error("no frontend url specified");
+}
+app.use(
+    cors({
+        origin: frontend,
+    }),
+);
 
 const init = async () => {
     await client.connect();
