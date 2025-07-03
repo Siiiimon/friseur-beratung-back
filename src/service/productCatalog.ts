@@ -7,6 +7,15 @@ export const queryProductCatalog = async (
     tag: string,
     type: string,
 ): Promise<Result<Product>> => {
+    if (!tag || !type) {
+        return {
+            error: {
+                status: 400,
+                message: "'Tag' and 'Type' params are required",
+            },
+        };
+    }
+
     let query: string;
     let values: string[];
 
