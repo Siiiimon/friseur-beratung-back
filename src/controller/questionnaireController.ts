@@ -6,8 +6,8 @@ import { Responses } from "../types/questionnaire";
 import { evaluate } from "../service/questionnaireEvaluation";
 import { getTopTags, queryProductCatalog } from "../service/productCatalog";
 
-export const newQuestionnaire = (_: Request, res: Response) => {
-    const questions = getQuestionnaireData();
+export const newQuestionnaire = async (_: Request, res: Response) => {
+    const questions = await getQuestionnaireData();
     res.json({ id: uuidv4(), questions });
 };
 
@@ -17,7 +17,7 @@ export const submitQuestionnaire = async (
 ): Promise<void> => {
     const { id, responses } = req.body as { id: string; responses: Responses };
 
-    const { ok: tallies, error } = evaluate(responses);
+    const { ok: tallies, error } = await evaluate(responses);
     if (error) {
         res.status(error.status).json({ error: error.message });
         return;

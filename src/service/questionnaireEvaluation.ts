@@ -2,15 +2,15 @@ import { Choice, Responses } from "../types/questionnaire";
 import { getQuestionnaireData } from "./questionnaireData";
 import { Result } from "../types/result";
 
-export const evaluate = (
+export const evaluate = async (
     responses: Responses,
-): Result<Record<string, number>> => {
+): Promise<Result<Record<string, number>>> => {
     if (!responses || responses.length === 0) {
         return { error: { status: 400, message: "empty answer sheet" } };
     }
 
     const tallies: Record<string, number> = {};
-    const questionnaire = getQuestionnaireData();
+    const questionnaire = await getQuestionnaireData();
 
     responses.forEach((response) => {
         // find question by response id
