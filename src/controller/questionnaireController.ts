@@ -24,6 +24,12 @@ export const submitQuestionnaire = async (
     }
 
     const topTags = getTopTags(tallies!, 2);
+    if (topTags.length < 2) {
+        res.status(400).json({
+            error: "Insufficient data to generate recommendations",
+        });
+        return;
+    }
 
     const shampoo = await queryProductCatalog(
         req.app.locals.pg,
