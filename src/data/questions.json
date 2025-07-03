@@ -1,0 +1,14 @@
+[
+    {
+        "id": "A",
+        "label": "wie fühlt sich deine Kopfhaut an?",
+        "choices": [
+            {
+                "id": "a",
+                "label": "Trocken & juckend",
+                "tags": ["Repair", "Smooth", "Hydrate", "Everyday", "Color"]
+            },
+            { "id": "b", "label": "Fettig & schuppig", "tags": ["Scalp"] }
+        ]
+    }
+]
